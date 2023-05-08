@@ -1,0 +1,53 @@
+CREATE TABLE exchange (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+abbrev VARCHAR(32) NOT NULL,
+name VARCHAR(255) NOT NULL,
+city VARCHAR(255) NULL,
+country VARCHAR(255) NULL,
+currency VARCHAR(64) NULL,
+timezone_offset TIME NULL,
+created_date DATETIME NOT NULL,
+last_updated_date DATETIME NOT NULL
+);
+
+
+CREATE TABLE data_vendor (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+name VARCHAR(64) NOT NULL,
+website_url VARCHAR(255) NULL,
+support_email VARCHAR(255) NULL,
+created_date DATETIME NOT NULL,
+last_updated_date DATETIME NOT NULL
+);
+
+
+CREATE TABLE symbol (
+id INTEGER NOT NULL,
+exchange_id INTEGER NULL,
+ticker TEXT NOT NULL,
+instrument TEXT NOT NULL,
+name TEXT NULL,
+sector TEXT NULL,
+currency TEXT NULL,
+created_date DATETIME NOT NULL,
+last_updated_date DATETIME NOT NULL,
+PRIMARY KEY (id),
+FOREIGN KEY (exchange_id) REFERENCES exchange(id)
+);
+
+CREATE TABLE daily_price (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+data_vendor_id INTEGER NOT NULL,
+symbol_id INTEGER NOT NULL,
+price_date DATETIME NOT NULL,
+created_date DATETIME NOT NULL,
+last_updated_date DATETIME NOT NULL,
+open_price DECIMAL(19,4) NULL,
+high_price DECIMAL(19,4) NULL,
+low_price DECIMAL(19,4) NULL,
+close_price DECIMAL(19,4) NULL,
+adj_close_price DECIMAL(19,4) NULL,
+volume BIGINT NULL,
+FOREIGN KEY (data_vendor_id) REFERENCES data_vendor(id),
+FOREIGN KEY (symbol_id) REFERENCES symbol(id)
+);
