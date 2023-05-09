@@ -47,12 +47,11 @@ if __name__ == "__main__":
     # Create a pandas dataframe from the SQL query
     eth = pd.read_sql_query(sql, con=con, index_col="price_date")
     # Output the Hurst Exponent for each of the above series
-    # and the price of ETH (the Adjusted Close price) for
-    # the ADF test given above in the article
+    # and the price of ETH (the Adjusted Close price)
     print("Hurst(GBM): %0.2f" % hurst(gbm))
     print("Hurst(MR): %0.2f" % hurst(mr))
     print("Hurst(TR): %0.2f" % hurst(tr))
-    # Calculate the Hurst exponent for the AMZN adjusted closing prices
+    # Calculate the Hurst exponent for the ETH adjusted closing prices
     print("Hurst(ETH): %0.2f" % hurst(array(eth["adj_close_price"].tolist())))
 
 # The goal of the Hurst Exponent is to find wheather the scalar value is mean reverting, randomly walking or trending
