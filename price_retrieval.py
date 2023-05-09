@@ -1,11 +1,9 @@
-# price_retrieval.py
 from datetime import datetime as dt
 import sqlite3
 from openbb_terminal.sdk import openbb
 
 
-TICKER_COUNT = 100  # Change this to 500 to download all tickers
-WAIT_TIME_IN_SECONDS = 1.0  # Adjust how frequently the API is called
+TICKER_COUNT = 100  # Change this to 100 to download all tickers
 
 # Obtain a database connection to the SQLite instance
 con = sqlite3.connect("top_100_crypto.db")
@@ -61,7 +59,7 @@ def insert_daily_data_into_db(data_vendor_id, symbol_id, daily_data):
                 data.High,
                 data.Low,
                 data.Close,
-                data._5,
+                data._5,  # adj close
                 data.Volume,
             ),
         )
@@ -80,6 +78,5 @@ if __name__ == "__main__":
         print("Adding data for %s: %s out of %s" % (t[1], i + 1, lentickers))
         data = get_daily_historic_data(t[1])
         insert_daily_data_into_db("1", t[0], data)
-        # time.sleep(WAIT_TIME_IN_SECONDS)
     print("Successfully added pricing data to DB.")
     con.close()
