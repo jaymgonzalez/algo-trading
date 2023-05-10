@@ -146,3 +146,16 @@ if __name__ == "__main__":
     # Calculate and output the CADF test on the residuals
     cadf = ts.adfuller(df["res"])
     pprint.pprint(cadf)
+
+
+# The cointegration technique presumes that 2 assets in the same category will behave similarly giving the possibility of mean reversion between them. The way of calculating this is by using Cointegration ADF.
+# As we can see from the result below, we cannot reject the null hypothesis of no cointegration because test statistic is lower than any of the values plus p-value is really high for these pair.
+
+# (-1.8056819883620912,
+#  0.37764441538776833,
+#  16,
+#  714,
+#  {'1%': -3.4395418285955563,
+#   '10%': -2.5689301318958955,
+#   '5%': -2.865596454500293},
+#  4487.129387043653)
