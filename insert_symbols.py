@@ -1,7 +1,6 @@
 import datetime
 import sqlite3
 from openbb_terminal.sdk import openbb
-import pandas as pd
 
 
 def top_100_crypto():
