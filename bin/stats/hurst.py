@@ -3,8 +3,12 @@ import sqlite3
 from numpy import array, cumsum, log, polyfit, sqrt, std, subtract
 from numpy.random import randn
 import pandas as pd
+import os
 
-con = sqlite3.connect("top_100_crypto.db")
+# Get the path to the database file relative to the current working directory
+db_path = os.path.join(os.getcwd(), "top_100_crypto.db")
+
+con = sqlite3.connect(db_path)
 
 
 def hurst(time_series):

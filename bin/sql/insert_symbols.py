@@ -1,3 +1,4 @@
+import os
 import datetime
 import sqlite3
 from openbb_terminal.sdk import openbb
@@ -26,8 +27,11 @@ def insert_symbols(symbols):
     # Stores the current time, for the created_at record
     now = datetime.datetime.utcnow()
 
+    # Get the path to the database file relative to the current working directory
+    db_path = os.path.join(os.getcwd(), "top_100_crypto.db")
+
     # Connect to the SQLite instance
-    con = sqlite3.connect("top_100_crypto.db")
+    con = sqlite3.connect(db_path)
 
     # Loop through the DataFrame and insert each row into the symbol table
     for i, row in symbols.iterrows():

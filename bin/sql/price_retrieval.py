@@ -1,3 +1,4 @@
+import os
 from datetime import datetime as dt
 import sqlite3
 from openbb_terminal.sdk import openbb
@@ -5,8 +6,12 @@ from openbb_terminal.sdk import openbb
 
 TICKER_COUNT = 100  # Change this to 100 to download all tickers
 
+
+# Get the path to the database file relative to the current working directory
+db_path = os.path.join(os.getcwd(), "top_100_crypto.db")
+
 # Obtain a database connection to the SQLite instance
-con = sqlite3.connect("top_100_crypto.db")
+con = sqlite3.connect(db_path)
 
 
 def obtain_list_of_db_tickers():

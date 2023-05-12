@@ -3,10 +3,15 @@ import pprint
 import statsmodels.tsa.stattools as ts
 import sqlite3
 import pandas as pd
+import os
 
 
 # Obtain a database connection to the SQLite instance
-con = sqlite3.connect("top_100_crypto.db")
+
+# Get the path to the database file relative to the current working directory
+db_path = os.path.join(os.getcwd(), "top_100_crypto.db")
+
+con = sqlite3.connect(db_path)
 
 
 if __name__ == "__main__":

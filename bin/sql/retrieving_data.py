@@ -1,8 +1,12 @@
 import pandas as pd
 import sqlite3
+import os
 
 if __name__ == "__main__":
-    con = sqlite3.connect("top_100_crypto.db")
+    # Get the path to the database file relative to the current working directory and connect to it.
+    db_path = os.path.join(os.getcwd(), "top_100_crypto.db")
+
+    con = sqlite3.connect(db_path)
 
     # Select all of the historic BTC adjusted close data
     sql = """SELECT dp.price_date, dp.adj_close_price

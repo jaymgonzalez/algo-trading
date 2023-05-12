@@ -1,3 +1,4 @@
+import os
 from datetime import datetime as dt
 import pprint
 import matplotlib.pyplot as plt
@@ -96,7 +97,10 @@ def plot_residuals(df, start_date, end_date):
 
 
 if __name__ == "__main__":
-    con = sqlite3.connect("top_100_crypto.db")
+    # Get the path to the database file relative to the current working directory
+    db_path = os.path.join(os.getcwd(), "top_100_crypto.db")
+
+    con = sqlite3.connect(db_path)
 
     # Download the ETH OHLCV data from 1/1/2018 to 1/1/2023
     start_date = dt(2021, 1, 1)

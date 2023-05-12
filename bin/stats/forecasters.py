@@ -1,7 +1,8 @@
 from datetime import datetime as dt, timedelta as td
 
 # from dotenv import load_dotenv
-# import os
+
+import os
 import numpy as np
 import pandas as pd
 import sqlite3
@@ -84,10 +85,10 @@ def create_lagged_series(symbol, start_date, end_date, lags=5):
 
 
 if __name__ == "__main__":
-    # # Create an AlphaVantage API instance
-    # av = TimeSeries(key=av_key, output_format="pandas")
-    # import data from sqlite3
-    con = sqlite3.connect("top_100_crypto.db")
+    # Get the path to the database file relative to the current working directory
+    db_path = os.path.join(os.getcwd(), "top_100_crypto.db")
+
+    con = sqlite3.connect(db_path)
 
     # Download the S&P500 ETF time series
     start_date = dt(2016, 1, 10)
