@@ -4,10 +4,12 @@ import sqlite3
 import os
 
 
-def get_daily_data(symbol, start_date, end_date, db, columns):
+def get_daily_data(symbol, start_date, end_date, columns, db="top_100_crypto.db"):
     db_path = os.path.join(os.getcwd(), db)
 
     con = sqlite3.connect(db_path)
+
+    symbol = symbol.upper()
 
     # Add 'dp.' prefix to each column name
     prefixed_columns = [f"dp.{column}" for column in columns]
@@ -28,14 +30,3 @@ def get_daily_data(symbol, start_date, end_date, db, columns):
     con.close()
 
     return symbol_data
-
-
-print(
-    get_daily_data(
-        "ETH",
-        dt(2018, 1, 1),
-        dt(2023, 1, 1),
-        "top_100_crypto.db",
-        ["adj_close_price", "volume"],
-    )
-)
