@@ -48,13 +48,19 @@ def market_neutral_sharpe(ticker, benchmark):
 
 
 if __name__ == "__main__":
-    # Download the AlphaBet (Google) OHLCV data from 1/1/2005 to 1/1/2013
-    start_date = dt(2005, 1, 1)
-    end_date = dt(2013, 1, 1)
-    # Create a DataFrame of AlphaBet (Google) stock prices
-    goog = av.get_daily_historic_data("GOOGL", start_date, end_date)
-    # Create a DataFrame of S&P ETF stock prices based on AlphaVantage data
-    spy = av.get_daily_historic_data("SPY", start_date, end_date)
+    # Download the ETH OHLCV data from 1/1/2018 to 1/1/2023
+    start_date = dt(2018, 1, 1)
+    end_date = dt(2023, 1, 1)
+    sql = f"""SELECT dp.price_date, dp.adj_close_price
+      FROM symbol AS sym
+      INNER JOIN daily_price AS dp
+      ON dp.symbol_id = sym.id
+      WHERE sym.ticker = 'ETH'
+      AND dp.price_date BETWEEN '{start_date}' AND '{end_date}'
+      ORDER BY dp.price_date ASC;"""
+    # Create a pandas dataframe from the SQL query
+    eth = pd.read_sql_query(sql, con=con, index_col="price_date")
+
 """
 print(
 "AlphaBet Sharpe Ratio: %s" %
